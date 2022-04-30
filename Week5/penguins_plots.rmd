@@ -1,0 +1,40 @@
+---
+title: "Penguins Plots"
+author: "Neal"
+date: "4/29/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Setting up environment
+Notes: setting up R environment by loading the `tidyverse` and `palmerpenguins` packages:
+
+```{r loading packages, echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+
+## Previewing data
+```{r data check, echo = TRUE, include = TRUE}
+glimpse(penguins)
+```
+
+
+## Making some plots
+
+```{r penguins plot, warning=FALSE, message=FALSE}
+ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) +
+        geom_point() +
+        geom_smooth(method = "lm", aes(color = "lm"), se = FALSE) +
+        geom_smooth(method = "loess", aes(color = "loess"), se = FALSE) +
+        geom_smooth(method = "gam", formula = y ~ s(x), aes(color = "gam"), se = FALSE) +
+        labs(title = "Relationship between flipper length and body mass")
+```
+
+
+
